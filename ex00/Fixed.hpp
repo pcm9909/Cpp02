@@ -1,9 +1,6 @@
 #ifndef FIXED_HPP
 #define FIXED_HPP
 
-//FixedPointBits = 전체 비트수
-//FractionalBits = 소수부 비트수
-
 class Fixed
 {
 	public:
