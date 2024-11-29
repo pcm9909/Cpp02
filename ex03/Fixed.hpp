@@ -35,6 +35,8 @@ class Fixed
 		Fixed operator*(Fixed const &fixed);
 		Fixed operator/(Fixed const &fixed);
 
+		Fixed operator&&(Fixed const &fixed);
+
 		//max min
 		static Fixed	&max(Fixed &ref1, Fixed &ref2);
 		static const Fixed	&max(Fixed const &ref1, Fixed const &ref2);

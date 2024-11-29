@@ -26,27 +26,23 @@ Fixed Point::getY() const
 	return this->_y;
 }
 
-Point::~Point()
-{
-    ;
-}
+Point::~Point(){}
 
-Fixed sign (Point p1, Point p2, Point p3)
+Fixed area (Point p1, Point p2, Point p3)
 {
-    return (p1.getX() - p3.getX()) * (p2.getY() - p3.getY()) - (p2.getX() - p3.getX()) * (p1.getY() - p3.getY());
+	Fixed temp = ((p1.getX() * p2.getY() + p2.getX() * p3.getY() + p3.getX() * p1.getY()) - (p2.getX() * p1.getY() + p3.getX() * p2.getY() + p1.getX() * p3.getY())) / 2 ;
+
+	return temp < 0 ? temp * -1 : temp;
 }
 
 bool bsp (Point v1, Point v2, Point v3, Point pt)
 {
-    Fixed d1, d2, d3;
-    bool has_neg, has_pos;
+	Fixed p1, p2, p3, target;
 
-    d1 = sign(pt, v1, v2);
-    d2 = sign(pt, v2, v3);
-    d3 = sign(pt, v3, v1);
+	target = area(v1, v2, v3);
+	p1 = area(pt, v2, v3);
+	p2 = area(v1, pt, v3);
+	p3 = area(v1, v2, pt);
 
-    has_neg = (d1 < 0) || (d2 < 0) || (d3 < 0);
-    has_pos = (d1 > 0) || (d2 > 0) || (d3 > 0);
-
-    return !(has_neg && has_pos);
+	return (p1 != 0 && p2 != 0 && p3 != 0) && (target == p1 + p2 + p3);
 }
